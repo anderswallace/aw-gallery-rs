@@ -1,0 +1,4 @@
+[alias]
+check-all = "!cargo fmt --all && cargo clippy-all && cargo test"
+clippy-all = "clippy --all-targets --all-features -- -D warnings"
+
