@@ -1,3 +1,4 @@
+pub mod gallery_config;
 pub mod gallery_io_config;
 pub mod gallery_services_config;
 pub mod io;
