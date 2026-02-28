@@ -1,0 +1,10 @@
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
+
+use crate::configs::services::gallery_s3_objects_service_impl::GalleryS3ObjectsServiceImpl;
+
+/// Configuration that selects the implementation for each Gallery service used by Gallery
+#[derive(Debug, Clone, PartialEq, PartialOrd, Deserialize, Serialize, Eq, JsonSchema)]
+pub struct GalleryS3ServicesConfig {
+    pub s3_object: GalleryS3ObjectsServiceImpl,
+}
