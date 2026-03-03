@@ -6,8 +6,11 @@ edition = "2024"
 [dependencies]
 anyhow = "1.0.102"
 async-trait = "0.1.89"
+aws-config = { version = "1.8.14", features = ["behavior-version-latest"] }
+aws-sdk-s3 = "1.124.0"
 chrono = { version = "0.4.44", features = ["serde"] }
 schemars = "1.2.1"
 serde = { version = "1.0.228", features = ["derive"] }
 strum = "0.28.0"
 strum_macros = "0.28.0"
+tokio = { version = "1.50.0", features = ["full"] }
