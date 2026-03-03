@@ -6,7 +6,7 @@ use crate::data::s3::s3_object_key::S3ObjectKey;
 use crate::data::s3::s3_presigned_url::S3PresignedUrl;
 use crate::io::s3_objects::s3_objects_io::S3ObjectsIO;
 
-/// Null implementation that rejects all S3 operations
+/// Null implementation that rejects all S3 operations.
 pub struct NullS3ObjectsIO;
 
 #[async_trait]
