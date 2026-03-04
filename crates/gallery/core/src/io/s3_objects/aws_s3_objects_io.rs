@@ -2,11 +2,12 @@ use anyhow::{Result, bail};
 use async_trait::async_trait;
 use aws_config::Region;
 use aws_sdk_s3 as s3;
+use s3::primitives::ByteStream;
 
 use crate::{
     configs::s3_config::S3Config,
     data::{
-        photo::image::Image,
+        photo::image_upload::ImageUpload,
         s3::{s3_object_key::S3ObjectKey, s3_presigned_url::S3PresignedUrl},
     },
     io::s3_objects::s3_objects_io::S3ObjectsIO,
@@ -35,8 +36,17 @@ impl AwsS3ObjectsIO {
 
 #[async_trait]
 impl S3ObjectsIO for AwsS3ObjectsIO {
-    async fn upload_file(&self, _image: Image) -> Result<S3ObjectKey> {
-        bail!("TODO: Implement this function")
+    async fn upload_file(&self, image: ImageUpload) -> Result<S3ObjectKey> {
+        let body = ByteStream::from(image.bytes);
+        self.client
+            .put_object()
+            .bucket(&self.bucket)
+            .key(&image.filename)
+            .body(body)
+            .send()
+            .await?;
+
+        Ok(S3ObjectKey::new(&image.filename)?)
     }
 
     async fn generate_presigned_url(&self, _key: &S3ObjectKey) -> Result<S3PresignedUrl> {

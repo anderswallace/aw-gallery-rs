@@ -1,3 +1,4 @@
+use anyhow::{Result, bail};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
@@ -5,10 +6,10 @@ use serde::{Deserialize, Serialize};
 pub struct S3ObjectKey(String);
 
 impl S3ObjectKey {
-    pub fn new(value: impl Into<String>) -> Result<Self, &'static str> {
+    pub fn new(value: impl Into<String>) -> Result<Self> {
         let value = value.into();
         if value.trim().is_empty() {
-            return Err("S3 Object key must not be empty");
+            bail!("S3 Object key must not be empty")
         }
         Ok(Self(value))
     }
