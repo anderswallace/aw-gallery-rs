@@ -12,5 +12,5 @@ pub trait S3ObjectsIO: Send + Sync + 'static {
     async fn upload_file(&self, image: ImageUpload) -> Result<S3ObjectKey>;
 
     /// Generates a pre-signed URL using the S3 object key of an image
-    async fn generate_presigned_url(&self, key: &S3ObjectKey) -> Result<S3PresignedUrl>;
+    async fn generate_presigned_url(&self, key: S3ObjectKey) -> Result<S3PresignedUrl>;
 }

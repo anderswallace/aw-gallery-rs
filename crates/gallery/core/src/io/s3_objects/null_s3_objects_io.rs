@@ -15,7 +15,7 @@ impl S3ObjectsIO for NullS3ObjectsIO {
         bail!("S3ObjectsIO is disabled (null implementation)")
     }
 
-    async fn generate_presigned_url(&self, _key: &S3ObjectKey) -> Result<S3PresignedUrl> {
+    async fn generate_presigned_url(&self, _key: S3ObjectKey) -> Result<S3PresignedUrl> {
         bail!("S3ObjectsIO is disabled (null implementation)")
     }
 }

@@ -51,7 +51,7 @@ impl S3ObjectsIO for AwsS3ObjectsIO {
         Ok(S3ObjectKey::new(&image.filename)?)
     }
 
-    async fn generate_presigned_url(&self, key: &S3ObjectKey) -> Result<S3PresignedUrl> {
+    async fn generate_presigned_url(&self, key: S3ObjectKey) -> Result<S3PresignedUrl> {
         let presigned = self
             .client
             .get_object()
