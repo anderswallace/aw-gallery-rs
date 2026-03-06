@@ -9,6 +9,7 @@ async-trait = "0.1.89"
 aws-config = { version = "1.8.14", features = ["behavior-version-latest"] }
 aws-sdk-s3 = "1.124.0"
 chrono = { version = "0.4.44", features = ["serde"] }
+derive_more = { version ="2", features = ["constructor"] }
 schemars = "1.2.1"
 serde = { version = "1.0.228", features = ["derive"] }
 strum = "0.28.0"

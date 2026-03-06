@@ -1,6 +1,6 @@
-use std::sync::Arc;
-
 use anyhow::Result;
+use derive_more::Constructor;
+use std::sync::Arc;
 
 use crate::{
     data::{
@@ -12,14 +12,9 @@ use crate::{
 };
 
 /// Orchestrator implementation of S3ObjectsService
+#[derive(Constructor)]
 pub struct OrchestratorS3ObjectsService {
     s3_objects_io: Arc<dyn S3ObjectsIO>,
-}
-
-impl OrchestratorS3ObjectsService {
-    pub fn new(s3_objects_io: Arc<dyn S3ObjectsIO>) -> Self {
-        Self { s3_objects_io }
-    }
 }
 
 #[async_trait::async_trait]
