@@ -1,7 +1,9 @@
-use anyhow::{Result, bail};
+use std::time::Duration;
+
+use anyhow::Result;
 use async_trait::async_trait;
 use aws_config::Region;
-use aws_sdk_s3 as s3;
+use aws_sdk_s3::{self as s3, presigning::PresigningConfig};
 use s3::primitives::ByteStream;
 
 use crate::{
@@ -49,7 +51,22 @@ impl S3ObjectsIO for AwsS3ObjectsIO {
         Ok(S3ObjectKey::new(&image.filename)?)
     }
 
-    async fn generate_presigned_url(&self, _key: &S3ObjectKey) -> Result<S3PresignedUrl> {
-        bail!("TODO: Implement this function")
+    async fn generate_presigned_url(&self, key: &S3ObjectKey) -> Result<S3PresignedUrl> {
+        let presigned = self
+            .client
+            .get_object()
+            .bucket(&self.bucket)
+            .key(key.as_str())
+            .presigned(
+                PresigningConfig::builder()
+                    .expires_in(Duration::from_secs(60))
+                    .build()
+                    .expect("valid presign config"),
+            )
+            .await?;
+
+        Ok(S3PresignedUrl {
+            url: presigned.uri().to_string(),
+        })
     }
 }
