@@ -14,7 +14,7 @@ pub struct S3Config {
 }
 
 impl S3Config {
-    fn validate_field(&self) -> Result<()> {
+    pub fn validate_field(&self) -> Result<()> {
         if self.region.is_empty() {
             bail!("Region is not set for S3Config")
         }

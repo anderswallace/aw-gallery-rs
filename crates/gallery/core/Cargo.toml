@@ -12,6 +12,7 @@ chrono = { version = "0.4.44", features = ["serde"] }
 derive_more = { version ="2", features = ["constructor"] }
 schemars = "1.2.1"
 serde = { version = "1.0.228", features = ["derive"] }
+serde_yml = "0.0.12"
 strum = "0.28.0"
 strum_macros = "0.28.0"
 tokio = { version = "1.50.0", features = ["full"] }
