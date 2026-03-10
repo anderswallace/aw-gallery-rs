@@ -22,7 +22,7 @@ impl GalleryWebState {
 
     #[must_use]
     pub fn services(&self) -> &GalleryServices {
-        &self.services.as_ref()
+        self.services.as_ref()
     }
 
     #[must_use]
