@@ -5,6 +5,8 @@ use anyhow::Result;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
+use crate::classes::configs::has_gallery_io_config::HasGalleryIoConfig;
+use crate::classes::configs::has_gallery_services_config::HasGalleryServicesConfig;
 use crate::configs::gallery_io_config::GalleryIoConfig;
 use crate::configs::gallery_services_config::GalleryServicesConfig;
 
@@ -16,6 +18,18 @@ use crate::configs::gallery_services_config::GalleryServicesConfig;
 pub struct GalleryConfig {
     pub io: GalleryIoConfig,
     pub services: GalleryServicesConfig,
+}
+
+impl HasGalleryServicesConfig for GalleryConfig {
+    fn gallery_services_config(&self) -> &GalleryServicesConfig {
+        &self.services
+    }
+}
+
+impl HasGalleryIoConfig for GalleryConfig {
+    fn gallery_io_config(&self) -> &GalleryIoConfig {
+        &self.io
+    }
 }
 
 impl GalleryConfig {
