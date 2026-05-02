@@ -1,7 +1,10 @@
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-use crate::configs::services::gallery_s3_objects_service_impl::GalleryS3ObjectsServiceImpl;
+use crate::configs::services::{
+    gallery_db_service_impl::GalleryDbServiceImpl,
+    gallery_s3_objects_service_impl::GalleryS3ObjectsServiceImpl,
+};
 
 /// Configuration that selects the implementation for each Gallery service used by Gallery
 #[derive(
@@ -10,4 +13,5 @@ use crate::configs::services::gallery_s3_objects_service_impl::GalleryS3ObjectsS
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct GalleryServicesConfig {
     pub s3_objects: GalleryS3ObjectsServiceImpl,
+    pub db: GalleryDbServiceImpl,
 }
