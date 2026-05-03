@@ -1,2 +1,8 @@
-io: null;
-services: null;
+io:
+  s3_objects: "null"
+  s3:
+    region: "placeholder"
+    bucket: "placeholder"
+services:
+  s3Objects: "null"
+  db: "null"
