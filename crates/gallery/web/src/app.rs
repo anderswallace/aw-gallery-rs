@@ -1,3 +1,4 @@
+use axum::Router;
 use std::sync::Arc;
 
 use anyhow::{Context, Result};
@@ -5,7 +6,7 @@ use gallery_core::{
     configs::gallery_config::GalleryConfig, services::gallery_services::GalleryServices,
 };
 
-use crate::state::GalleryWebState;
+use crate::{http, state::GalleryWebState};
 
 /// Loads Gallery configuration and initializes the core services for the web API
 pub async fn init_state_from_disk() -> Result<Arc<GalleryWebState>> {
@@ -17,4 +18,9 @@ pub async fn init_state_from_disk() -> Result<Arc<GalleryWebState>> {
     );
 
     Ok(Arc::new(GalleryWebState::new(config, gallery_services)))
+}
+
+// Build routes with Gallery services state
+pub fn build_router(state: Arc<GalleryWebState>) -> Router {
+    http::build().with_state(state)
 }

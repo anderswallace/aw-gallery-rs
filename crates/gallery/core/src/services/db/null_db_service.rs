@@ -1,4 +1,3 @@
-use crate::data::db::db_record::DbRecord;
 use crate::services::db::db_service::DbService;
 use anyhow::{Result, bail};
 
@@ -10,7 +9,7 @@ const ERR: &str = "DB Service is unavailable in the Null preset";
 
 #[async_trait::async_trait]
 impl DbService for NullDbService {
-    async fn db_method(&self) -> Result<DbRecord> {
+    async fn db_method(&self) -> Result<String> {
         bail!(ERR);
     }
 }
