@@ -1,7 +1,8 @@
 use std::env::var;
 use std::fs::read_to_string;
+use std::path::PathBuf;
 
-use anyhow::Result;
+use anyhow::{Context, Result};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -34,8 +35,13 @@ impl HasGalleryIoConfig for GalleryConfig {
 
 impl GalleryConfig {
     pub fn load() -> Result<Self> {
-        let contents = read_to_string("gallery.yml")?;
-        let mut config: Self = serde_yml::from_str(&contents)?;
+        let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("gallery.yml");
+
+        let contents = read_to_string(&path)
+            .with_context(|| format!("Error finding Gallery yaml file at {}", path.display()))?;
+
+        let mut config: Self =
+            serde_yml::from_str(&contents).context("Error parsing Gallery yaml file")?;
 
         if let Ok(region) = var("AWS_REGION") {
             config.io.s3.region = region;
