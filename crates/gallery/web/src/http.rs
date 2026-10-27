@@ -1,17 +1,12 @@
 use anyhow::{Context, Result};
 use axum::Router;
-use std::sync::Arc;
 
-use crate::{
-    app::{build_router, init_state_from_disk},
-    state::GalleryWebState,
-};
+mod login;
 
-mod photos;
+use crate::app::build_router;
 
 pub async fn serve() -> Result<()> {
-    let state = init_state_from_disk().await?;
-    let router = build_router(state);
+    let router = build_router();
 
     // build application with single route
 
@@ -22,6 +17,6 @@ pub async fn serve() -> Result<()> {
 }
 
 // aggregate all http routes
-pub fn build() -> Router<Arc<GalleryWebState>> {
-    photos::router()
+pub fn build() -> Router {
+    login::router()
 }
