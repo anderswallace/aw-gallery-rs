@@ -1,0 +1,13 @@
+{
+	"name": "anders-wallace-admin",
+	"compatibility_date": "2026-10-29",
+	"assets": {
+		"directory": "./dist"
+	},
+	"routes": [
+		{
+			"pattern": "admin.anders-wallace.com",
+			"custom_domain": true
+		}
+	]
+}
