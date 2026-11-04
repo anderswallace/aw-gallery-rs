@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+}
+
+.contentWrapper {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.addPhoto {
+  display: flex;
+  justify-content: right;
+  padding: 2rem;
+}

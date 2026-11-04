@@ -1,0 +1,21 @@
+.overlay {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 250ms ease,
+    visibility 250ms ease;
+
+  &[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal {
+    transform: translateY(20px);
+    transition: transform 250ms ease;
+  }
+
+  &[data-open="true"] .modal {
+    transform: translateY(0);
+  }
+}
