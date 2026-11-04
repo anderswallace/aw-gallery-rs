@@ -1,9 +1,21 @@
 .overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1px);
+
   opacity: 0;
   visibility: hidden;
   transition:
     opacity 250ms ease,
     visibility 250ms ease;
+
 
   &[data-open="true"] {
     opacity: 1;
@@ -11,6 +23,16 @@
   }
 
   .modal {
+    display: flex;
+    width: 10rem;
+    height: 10rem;
+
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+
+    border: 1px solid black;
+
     transform: translateY(20px);
     transition: transform 250ms ease;
   }
