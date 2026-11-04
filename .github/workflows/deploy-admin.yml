@@ -3,7 +3,7 @@ name: Deploy Admin Page
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "apps/gallery-admin/src/**"
       - ".github/workflows/deploy-admin.yml"
