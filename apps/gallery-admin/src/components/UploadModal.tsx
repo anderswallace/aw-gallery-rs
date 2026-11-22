@@ -6,17 +6,29 @@ import AutoComplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
+import Alert from "@mui/material/Alert";
 
 interface UploadModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+type UploadStatus = "idle" | "uploading" | "success" | "error";
+
 export default function UploadModal({ isOpen, onClose }: UploadModalProps) {
   const [cameraValue, setCameraValue] = useState<string | null>(
     cameraOptions[0],
   );
   const [filmValue, setFilmValue] = useState<string>("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [status, setStatus] = useState<UploadStatus>("idle");
+  const [previewUrl, setPreviewUrl] = useState(null);
+
+  const compressionOptions = {
+    maxSizeMB: 2,
+    useWebWorker: true,
+    fileType: "image/webp",
+  }
 
   const VisuallyHiddenInput = styled("input")({
     clipPath: "inset(50%)",
@@ -28,6 +40,27 @@ export default function UploadModal({ isOpen, onClose }: UploadModalProps) {
     whiteSpace: "nowrap",
     width: 1,
   });
+
+  const handleFileChange = (event) => {
+    const file = event.target.files && event.target.files[0];
+
+    if(!file) {
+      alert("Please upload a file");
+      setSelectedFile(null);
+    } else {
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  }
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      };
+    }
+  }, [previewUrl]);
+
 
   return (
     <div className={styles.overlay} data-open={isOpen} inert={!isOpen}>
@@ -54,6 +87,11 @@ export default function UploadModal({ isOpen, onClose }: UploadModalProps) {
             fullWidth
           />
         </div>
+          {selectedFile && previewUrl && (
+            <div className={styles.previewImage}>
+              <img src={previewUrl} alt={"Preview of uploaded file"}/>
+            </div>
+          )}
         <div className={styles.photoButtons}>
           <Button
             component="label"
@@ -62,9 +100,10 @@ export default function UploadModal({ isOpen, onClose }: UploadModalProps) {
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
           >
-            Upload File
+            Select Photo
+            <VisuallyHiddenInput type="file" onChange={handleFileChange} accept=".jpg, .png"/>
           </Button>
-          <Button>Save Photo< /Button>
+          <Button disabled={!selectedFile || !filmValue || !cameraValue}>Upload< /Button>
         </div>
       </div>
     </div>
