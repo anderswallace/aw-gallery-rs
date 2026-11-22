@@ -14,10 +14,7 @@ function App() {
           </Button>
         </div>
 
-        <UploadModal
-          isOpen={isUploadOpen}
-          onClose={() => setIsUploadOpen(false)}
-        />
+        <UploadModal isOpen={isUploadOpen} />
       </div>
     </>
   );
