@@ -9,5 +9,18 @@
 			"pattern": "admin.anders-wallace.com",
 			"custom_domain": true
 		}
+	],
+	"r2_buckets": [
+		{
+			"bucket_name": "anders-gallery-photos",
+			"binding": "anders_gallery_photos"
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "anders_gallery_db",
+			"database_name": "anders-gallery-db",
+			"database_id": "ded3f50f-e416-4ae7-8ba2-1c16a1a9138b"
+		}
 	]
 }
