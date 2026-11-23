@@ -1,0 +1,7 @@
+[package]
+name = "gallery-worker"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+worker = "0.9.0"
