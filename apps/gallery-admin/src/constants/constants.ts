@@ -4,3 +4,5 @@ export const cameraOptions = [
   "Leica Q2",
   "Ricoh GR3 IIIx",
 ];
+
+export const digitalCameraOptions = ["Leica Q2", "Ricoh GR3 IIIx"];

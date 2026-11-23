@@ -1,6 +1,6 @@
 import styles from "./UploadModal.module.scss";
 import { useState, useEffect } from "react";
-import { cameraOptions } from "../constants/constants.ts";
+import { cameraOptions, digitalCameraOptions } from "../constants/constants.ts";
 import TextField from "@mui/material/TextField";
 import AutoComplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
@@ -14,8 +14,21 @@ interface UploadModalProps {
 
 //type UploadStatus = "idle" | "uploading" | "success" | "error";
 
+const VisuallyHiddenInput = styled("input")({
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
+
 export default function UploadModal({ isOpen }: UploadModalProps) {
-  const [cameraValue, setCameraValue] = useState<string>(cameraOptions[0]);
+  const [cameraValue, setCameraValue] = useState<string | null>(
+    cameraOptions[0],
+  );
   const [filmValue, setFilmValue] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState(null);
   //const [status, setStatus] = useState<UploadStatus>("idle");
@@ -27,18 +40,7 @@ export default function UploadModal({ isOpen }: UploadModalProps) {
   //   fileType: "image/webp",
   // };
 
-  const VisuallyHiddenInput = styled("input")({
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
-
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
 
     if (!file) {
@@ -64,7 +66,10 @@ export default function UploadModal({ isOpen }: UploadModalProps) {
         <div style={{ width: "100%" }}>
           <AutoComplete
             value={cameraValue}
-            onChange={(_event: any, newValue: string | null) => {
+            onChange={(
+              _event: React.InputEvent<HTMLInputElement>,
+              newValue: string | null,
+            ) => {
               setCameraValue(newValue);
             }}
             options={cameraOptions}
@@ -78,9 +83,7 @@ export default function UploadModal({ isOpen }: UploadModalProps) {
             value={filmValue}
             label="Film"
             variant="outlined"
-            disabled={
-              cameraValue === "Leica Q2" || cameraValue == "Ricoh GR IIIx"
-            }
+            disabled={digitalCameraOptions.includes(cameraValue)}
             onChange={(e) => setFilmValue(e.target.value)}
             fullWidth
           />
