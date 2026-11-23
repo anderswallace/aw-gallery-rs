@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "apps/gallery-admin/src/**"
+      - "crates/gallery-worker/src/**"
       - ".github/workflows/deploy-admin.yml"
 
 jobs:
