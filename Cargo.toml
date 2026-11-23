@@ -1,8 +1,0 @@
-[workspace]
-members = [
-  "crates/gallery/api",
-  "crates/gallery/core",
-  "crates/gallery/web",
-]
-resolver = "2"
-
