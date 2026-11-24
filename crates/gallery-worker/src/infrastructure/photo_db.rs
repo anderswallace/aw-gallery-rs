@@ -11,12 +11,7 @@ impl PhotoDb {
         Self { db }
     }
 
-    pub async fn create_pending(
-        &self,
-        id: &String,
-        key: &String,
-        photo: &PhotoUpload,
-    ) -> Result<()> {
+    pub async fn create_pending(&self, id: &str, key: &str, photo: &PhotoUpload) -> Result<()> {
         let statement = self.db.prepare(
             "INSERT INTO photos (
                 id,
