@@ -1,6 +1,8 @@
 use worker::{Request, Response, Result, RouteContext};
 
-pub async fn upload(mut _req: Request, _ctx: RouteContext<()>) -> Result<Response> {
+use crate::services::photo_service::PhotoService;
+
+pub async fn upload(mut _req: Request, _ctx: RouteContext<PhotoService>) -> Result<Response> {
     // let form = req.form_data().await?;
     // let camera = form.get_field("camera");
     // let film = form

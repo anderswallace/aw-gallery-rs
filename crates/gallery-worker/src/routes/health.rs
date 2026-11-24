@@ -1,5 +1,7 @@
 use worker::{Request, Response, Result, RouteContext};
 
-pub async fn health(_req: Request, _ctx: RouteContext<()>) -> Result<Response> {
+use crate::services::photo_service::PhotoService;
+
+pub async fn health(_req: Request, _ctx: RouteContext<PhotoService>) -> Result<Response> {
     Response::ok("Ok")
 }
