@@ -8,6 +8,8 @@ on:
       - "apps/gallery-admin/src/**"
       - "crates/gallery-worker/src/**"
       - ".github/workflows/deploy-admin.yml"
+      - "crates/gallery-worker/Cargo.toml"
+      - "crates/gallery-worker/Cargo.lock"
 
 jobs:
   deploy:
