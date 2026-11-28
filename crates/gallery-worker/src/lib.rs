@@ -10,8 +10,8 @@ mod services;
 
 #[event(fetch)]
 async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
-    let bucket_service = PhotoBucket::new(env.bucket("anders-gallery-photos")?);
-    let db_service = PhotoDb::new(env.d1("anders-gallery-db")?);
+    let bucket_service = PhotoBucket::new(env.bucket("anders_gallery_photos")?);
+    let db_service = PhotoDb::new(env.d1("anders_gallery_db")?);
 
     let service = PhotoService::new(db_service, bucket_service);
 
