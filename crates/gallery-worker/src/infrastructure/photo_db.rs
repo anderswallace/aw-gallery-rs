@@ -21,13 +21,13 @@ impl PhotoDb {
                 camera,
                 film,
                 status
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')",
+            ) VALUES (?, ?, ?, ?, ?, ?, 'pending')",
         );
 
         let statement = statement.bind(&[
             JsValue::from_str(id),
-            JsValue::from(&photo.content_type),
             JsValue::from_str(key),
+            JsValue::from(&photo.content_type),
             JsValue::from_str(&photo.filename),
             JsValue::from_str(&photo.camera),
             photo
